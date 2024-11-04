@@ -35,6 +35,18 @@ def completeTask():
         print("Completed Tasks: ", completed)
 
 
+# function to delete tasks
+def deleteTask():
+    print("To do: ", toDo, "Completed: ", completed)
+    userInput = input("What task would you like to delete?").lower()
+    if userInput not in toDo or completed:
+        print("That task does not exist.")
+    elif userInput in toDo:
+        toDo.remove(userInput)
+    elif userInput in completed:
+        completed.remove(userInput)
+
+
 # main function
 def main():
     while True:
@@ -46,6 +58,8 @@ def main():
             addTask()
         elif userInput == "complete":
             completeTask()
+        elif userInput == "delete":
+            deleteTask()
         elif userInput == "q":
             exit()
         else:
