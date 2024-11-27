@@ -13,12 +13,15 @@ def displayLists():
 
 #function to add to list
 def addTask():
-    userInput = input("What would you like to add to your list?").lower()
-    if userInput not in toDo:
-        toDo.append(userInput)
-        print("Added task to list: ", toDo)
-    else:
-        print("That task is already in your list!")
+    while True:
+        userInput = input("What would you like to add to your list? (Enter Q to exit.)").lower()
+        if userInput != "q":
+            if userInput not in toDo:
+                toDo.append(userInput)
+                print("Added task to list: ", toDo)
+            elif userInput in toDo:
+                print("That task is already in your list!")
+        else: break
 
 
 # function to add task to completed list
@@ -47,11 +50,28 @@ def deleteTask():
         completed.remove(userInput)
 
 
+# function to write list to file
+def writeFile():
+    userInput = input("Which list would you like to write to a file? (to do or completed)")
+    # if user input is "to do" then create and write to a file called todo
+    if userInput == "to do":
+        with open("todo.txt", "w") as file:
+            for item in toDo:
+                file.write(item + '\n')
+        print("File has been created and written to.")
+    # if user input is "completed" create and write to a file called completed
+    if userInput == "completed":
+        with open("completed.txt", "w") as file:
+            for item in completed:
+                file.write(item + '\n')
+        print("File has been created and written to.")
+
 # main function
 def main():
     while True:
         print("Welcome to your to do list! What would you like to do today?")
-        userInput = input("You can say: display, add, complete, delete, save, or load. Press q to exit the program.").lower()
+        userInput = input("You can say: display, add, complete, delete, save, load or write (to write list to a file). "
+                          "Press q to exit the program.").lower()
         if userInput == "display":
             displayLists()
         elif userInput == "add":
@@ -60,6 +80,8 @@ def main():
             completeTask()
         elif userInput == "delete":
             deleteTask()
+        elif userInput == "write":
+            writeFile()
         elif userInput == "q":
             exit()
         else:
