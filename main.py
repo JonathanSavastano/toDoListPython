@@ -1,4 +1,5 @@
 # to do list app
+import os
 
 # initialize lists
 toDo = []
@@ -66,11 +67,19 @@ def writeFile():
                 file.write(item + '\n')
         print("File has been created and written to.")
 
+
+#function to delete file
+def deleteFile():
+    userInput = input("What file do you want to delete?")
+    os.remove(userInput)
+    print("File ", userInput, " has been deleted.")
+
+
 # main function
 def main():
     while True:
         print("Welcome to your to do list! What would you like to do today?")
-        userInput = input("You can say: display, add, complete, delete, save, load or write (to write list to a file). "
+        userInput = input("You can say: display, add, complete, delete task, save, write to file, or delete file. "
                           "Press q to exit the program.").lower()
         if userInput == "display":
             displayLists()
@@ -80,8 +89,10 @@ def main():
             completeTask()
         elif userInput == "delete":
             deleteTask()
-        elif userInput == "write":
+        elif userInput == "write to file":
             writeFile()
+        elif userInput == "delete file":
+            deleteFile()
         elif userInput == "q":
             exit()
         else:
